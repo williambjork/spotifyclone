@@ -24,10 +24,10 @@ async function refreshAccessToken(token) {
     
     catch (error) {
         console.error(error);
-
+        
         return {
-            ...token,
             error: "RefreshAccessTokenError",
+            ...token,s
         };
     }
 }
@@ -59,29 +59,32 @@ export default NextAuth({
 
         // initial sign in
         if (account && user) {
+
+          
+
             return {
                 ...token,
-                accesToken: account.access_token,
+                accessToken: account.access_token,
                 refreshToken: account.refresh_token,
                 username: account.providerAccountId,
-                accessTokenExpires: account.expires_at * 1000,
+                accessTokenExpires: account.expires_at * 1000,  
             }
         }
 
         // return if token not expired
         if (Date.now() < token.accessTokenExpires) {
-            Console.log("TOKEN VALID AF")
+            
             return token;
         }
 
     
-        console.log("TOKEN EXPIRED");
+        
         return await refreshAccessToken(token);
     },
 
     // create session for user
     async session ({ session, token}) {
-        session.uer.accessToken = token.acessToken;
+        session.user.accessToken = token.accessToken;
         session.user.refreshToken = token.refreshToken;
         session.user.username = token.username;
 
