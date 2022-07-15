@@ -12,7 +12,7 @@ export default function Home() {
           <Sidebar />
           <Center />
 
-          {/*center */}
+          
 
           <div> {/* player */}</div>
           
