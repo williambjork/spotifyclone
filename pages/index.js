@@ -10,13 +10,10 @@ export default function Home() {
       <div className="bg-black h-screen overflow-hidden">
         <main className="flex">
           <Sidebar />
-          <Center />
-
-          
-
-          <div> {/* player */}</div>
-          
+          <Center /> 
         </main>
+
+        
       </div>
     </>
   ); 
