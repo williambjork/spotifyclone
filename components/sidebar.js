@@ -59,6 +59,9 @@ function Sidebar() {
                     <h3 className="cursor-pointer hover:text-white">Playlist Name... </h3>
                     <h3 className="cursor-pointer hover:text-white">Playlist Name... </h3>
                     
+                    
+                    
+                    
                             
                   </div>
             </div>
