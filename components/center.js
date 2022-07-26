@@ -28,11 +28,11 @@ function Center() {
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user.image}
-            alt=""
-          />
+            alt=""/>
           <h2>{session?.user.name}</h2>
           <ChevronDownIcon className="h-5 w-5 " />
         </div>
+        
       </header>
 
       <section
