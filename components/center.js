@@ -24,6 +24,8 @@ function Center() {
     setColor(shuffle(colors).pop())
   }, [playlistId])
 
+  console.log("clicked center" + playlistId)
+
   return (
     <div className="flex-grow">
       <header className="absolute top-5 right-8">
