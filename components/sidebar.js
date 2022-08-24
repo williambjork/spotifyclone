@@ -15,12 +15,13 @@ function Sidebar() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
-  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
+  
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       spotifyApi.getUserPlaylists().then((data) => {
         setPlaylists(data.body.items);
+        console.log("playlists set")
       });
     }
   }, [session, spotifyApi]);
@@ -69,13 +70,11 @@ function Sidebar() {
         <hr className="border-t-[0.1px] border-gray-900"></hr>
 
         {playlists.map((playlist) => {
-          <p key={playlist.id} className="cursor-pointer hover:text-white">
+         return <h2 key={playlist.id} className="cursor-pointer hover:text-white">
             {playlist.name}
-          </p>
+            {console.log("playlists set boiii" + playlist.name)}
+          </h2>
         })}
-
-
-
 
       </div>
     </div>
