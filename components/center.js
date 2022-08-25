@@ -3,7 +3,8 @@ import { ChevronDownIcon } from '@heroicons/react/outline'
 import { useEffect, useState } from 'react'
 import { shuffle } from 'lodash'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { playlistIdState } from '../atoms/playlistAtom'
+import { playlistIdState, playlistState } from '../atoms/playlistAtom'
+import useSpotify from '../hooks/useSpotify'
 
 const colors = [
   'from-indingo-500',
@@ -17,14 +18,25 @@ const colors = [
 
 function Center() {
   const { data: session } = useSession()
+  const spotifyApi = useSpotify()
   const [color, setColor] = useState(null)
-  const playlistId = useRecoilValue(playlistIdState);
+  const playlistId = useRecoilValue(playlistIdState)
+  const [playlist, setPlaylist] = useRecoilState(playlistState)
 
   useEffect(() => {
     setColor(shuffle(colors).pop())
   }, [playlistId])
 
-  console.log("clicked center" + playlistId)
+  useEffect(() => {
+    spotifyApi
+      .getPlaylist(playlistId)
+      .then((data) => {
+        setPlaylist(data.body)
+      })
+      .catch((err) => console.log('Something went wrong!', err))
+  }, [spotifyApi, playlistId])
+
+  console.log(playlist)
 
   return (
     <div className="flex-grow">
@@ -33,17 +45,27 @@ function Center() {
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user.image}
-            alt=""/>
+            alt=""
+          />
           <h2>{session?.user.name}</h2>
           <ChevronDownIcon className="h-5 w-5 " />
         </div>
-        
       </header>
 
       <section
         className={`flex items-end space-x-7 bg-gradient-to-b 
             to-black ${color} h-80 w-full p-8 text-white`}
-      ></section>
+      >
+        <img
+          className="h-44 w-44 shadow-2xl"
+          src={playlist?.images?.[0]?.url}
+          alt=""
+        />
+        <div>
+          <p>PLAYLIST</p>
+          <h1 className="text-2xl md:text-3xl xl:text-5xl font bold">{playlist?.name}</h1>
+        </div>
+      </section>
     </div>
   )
 }
