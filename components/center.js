@@ -69,7 +69,9 @@ function Center() {
       </section>
 
       <div>
-        <Songs />
+       
+          <Songs />
+       
       </div>
     </div>
   )
