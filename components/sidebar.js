@@ -36,13 +36,7 @@ function Sidebar() {
                     text-xs lg:text-sm text-gray-500 scrollbar-hide
                     sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
       <div className="space-y-4">
-        <button
-          className="flex items-center space-x-2 hover:text-white"
-          onClick={() => signOut()}
-        >
-          <RssIcon className="h-5 w-5" />
-          <h3>Logout</h3>
-        </button>
+        
         <button className="flex items-center space-x-2 hover:text-white">
           <HomeIcon className="h-5 w-5" />
           <h3>Home</h3>
