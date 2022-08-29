@@ -1,10 +1,19 @@
+import { useState } from "react";
+import { useRecoilState } from 'recoil'
 import useSpotify from "../hooks/useSpotify"
 import convertMsToMinutesSeconds from "../lib/time"
+import { currentTrackIdState, isPlayingState } from "../atoms/songAtom"
 
 function Song({order, track}) {
     const spotifyApi = useSpotify();
+    const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackIdState);
+    const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
+
+    const playSong =() => {
+
+    }
   return (
-    <div className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer">
+    <div onClick={playSong} className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer">
         <div className="flex items-center space-x-4">
             <p> {order + 1} </p>
             <img className="h-10 w-10" src={track.track.album.images[0].url} alt="" />
@@ -16,7 +25,7 @@ function Song({order, track}) {
         </div>
 
         <div className="flex items-center justify-between ml-auto md:ml-0">
-            <p className="hidden md:inline w-40"> {track.track.album.name}</p>
+            <p className="hidden md:inline w-40 truncate"> {track.track.album.name}</p>
             <p>{convertMsToMinutesSeconds(track.track.duration_ms)}</p>
         </div>
     </div>
