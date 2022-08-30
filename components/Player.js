@@ -4,8 +4,9 @@ import { currentTrackIdState, isPlayingState } from '../atoms/songAtom'
 import useSpotify from '../hooks/useSpotify'
 import useSongInfo from '../hooks/useSongInfo'
 import { useEffect, useState } from 'react'
-import {  SwitchHorizontalIcon } from '@heroicons/react/outline'
-import { RewindIcon, FastForwardIcon, PauseIcon, PlayIcon, ReplyIcon } from '@heroicons/react/solid'
+import {  SwitchHorizontalIcon, VolumeUpIcon } from '@heroicons/react/outline'
+import { RewindIcon, FastForwardIcon, PauseIcon, PlayIcon, ReplyIcon, 
+        } from '@heroicons/react/solid'
 
 function Player() {
   const spotifyApi = useSpotify()
@@ -83,6 +84,12 @@ function Player() {
 
         <ReplyIcon className="button" />
 
+      </div>
+
+      <div>
+        <VolumeDownIcon className="button" />
+        <input type="range" value="" min={0} max={100} />
+        <VolumeUpIcon className="button" />
       </div>
     </div>
   )
