@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil';
 import useSpotify from '../hooks/useSpotify'
 import { playlistIdState } from "../atoms/playlistAtom"
+import { likedPlaylistState } from "../atoms/likedPlaylistAtom"
 
 function Sidebar() {
   const spotifyApi = useSpotify();
@@ -18,7 +19,7 @@ function Sidebar() {
   const [playlists, setPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
   
-  
+  const [ likedPlaylist, setLikedPlaylist] = useRecoilState(likedPlaylistState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -27,8 +28,24 @@ function Sidebar() {
       });
     }
   }, [session, spotifyApi]);
-
   
+  function handleLikedTracks() {
+    spotifyApi
+    .getMySavedTracks()
+    .then((data) => {
+      setLikedPlaylist(data.body.items)
+    })
+    console.log(likedPlaylist)
+  }
+  
+  useEffect(() => {
+    spotifyApi
+      .getPlaylist(playlistId)
+      .then((data) => {
+        setPlaylist(data.body)
+      })
+      .catch((err) => console.log('Something went wrong!', err))
+  }, [spotifyApi, playlistId])
   
 
   return (
@@ -60,7 +77,7 @@ function Sidebar() {
           <RssIcon className="h-5 w-5" />
           <h3>Your episodes</h3>
         </button>
-        <button className="flex items-center space-x-2 hover:text-white">
+        <button onClick={handleLikedTracks} className="flex items-center space-x-2 hover:text-white">
           <HeartIcon className="h-5 w-5" />
           <h3>Liked songs</h3>
         </button>

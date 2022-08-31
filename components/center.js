@@ -24,6 +24,8 @@ function Center() {
   const playlistId = useRecoilValue(playlistIdState)
   const [playlist, setPlaylist] = useRecoilState(playlistState)
 
+  
+
   useEffect(() => {
     setColor(shuffle(colors).pop())
   }, [playlistId])
@@ -37,12 +39,17 @@ function Center() {
       .catch((err) => console.log('Something went wrong!', err))
   }, [spotifyApi, playlistId])
 
+ 
+
   console.log(playlist)
 
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8">
-        <div onClick={signOut} className="flex cursor-pointer items-center space-x-3 rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80">
+        <div onClick={signOut} 
+             className="flex cursor-pointer items-center space-x-3 
+                        rounded-full bg-black p-1 pr-2 text-white 
+                        opacity-90 hover:opacity-80">
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user.image}
@@ -58,7 +65,7 @@ function Center() {
             to-black ${color} h-80 w-full p-8 text-white`}
       >
         <img
-          className="h-44 w-44 shadow-2xl"
+          className="h-44 w-44 rounded-md shadow-2xl"
           src={playlist?.images?.[0]?.url}
           alt=""
         />
