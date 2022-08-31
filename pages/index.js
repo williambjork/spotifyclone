@@ -2,7 +2,7 @@
 import { getSession } from 'next-auth/react';
 import Head from 'next/head'
 import Image from 'next/image'
-import Center from '../components/Center';
+import Center from '../components/center';
 import Sidebar from '../components/sidebar';
 import Player from '../components/Player';
 
