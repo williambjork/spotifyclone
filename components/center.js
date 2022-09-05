@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { shuffle } from 'lodash'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { playlistIdState, playlistState } from '../atoms/playlistAtom'
+import { likedPlaylistState } from '../atoms/likedPlaylistAtom'
 import useSpotify from '../hooks/useSpotify'
 import  Songs  from '../components/songs'
 
@@ -24,6 +25,8 @@ function Center() {
   const playlistId = useRecoilValue(playlistIdState)
   const [playlist, setPlaylist] = useRecoilState(playlistState)
 
+  const likedPlaylist = useRecoilValue(likedPlaylistState);
+
   
 
   useEffect(() => {
@@ -41,8 +44,8 @@ function Center() {
 
  
 
-  console.log(playlist)
-
+  console.log("liked songs: " + [likedPlaylist?.name])
+ 
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8">
