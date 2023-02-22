@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { playlistIdState, playlistState } from '../atoms/playlistAtom'
 import { likedPlaylistState } from '../atoms/likedPlaylistAtom'
 import useSpotify from '../hooks/useSpotify'
-import  Songs  from '../components/songs'
+import Songs from '../components/songs'
 
 const colors = [
   'from-indingo-500',
@@ -25,9 +25,7 @@ function Center() {
   const playlistId = useRecoilValue(playlistIdState)
   const [playlist, setPlaylist] = useRecoilState(playlistState)
 
-  const likedPlaylist = useRecoilValue(likedPlaylistState);
-
-  
+  const likedPlaylist = useRecoilValue(likedPlaylistState)
 
   useEffect(() => {
     setColor(shuffle(colors).pop())
@@ -42,17 +40,17 @@ function Center() {
       .catch((err) => console.log('Something went wrong!', err))
   }, [spotifyApi, playlistId])
 
- 
+  console.log('liked songs: ' + [likedPlaylist?.name])
 
-  console.log("liked songs: " + [likedPlaylist?.name])
- 
   return (
-    <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
+    <div className="h-screen flex-grow overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8">
-        <div onClick={signOut} 
-             className="flex cursor-pointer items-center space-x-3 
+        <div
+          onClick={signOut}
+          className="flex cursor-pointer items-center space-x-3 
                         rounded-full bg-black p-1 pr-2 text-white 
-                        opacity-90 hover:opacity-80">
+                        opacity-90 hover:opacity-80"
+        >
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user.image}
@@ -74,14 +72,14 @@ function Center() {
         />
         <div>
           <p>PLAYLIST</p>
-          <h1 className="text-2xl md:text-3xl xl:text-5xl font bold">{playlist?.name}</h1>
+          <h1 className="font bold text-2xl md:text-3xl xl:text-5xl">
+            {playlist?.name}
+          </h1>
         </div>
       </section>
 
       <div>
-       
-          <Songs />
-       
+        <Songs />
       </div>
     </div>
   )
